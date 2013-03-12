@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextVerteiler", "TextVerteiler\TextVerteiler.csproj", "{4D2BC51D-0072-4C9E-B569-3A6D6A767D95}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextVerteilerServerDns", "TextVerteiler\TextVerteilerServerDns.csproj", "{4D2BC51D-0072-4C9E-B569-3A6D6A767D95}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
