@@ -103,8 +103,6 @@ namespace TextVerteiler
 
             FormMain.HistoryStackSize = 20;
 
-            tbMessage.MaxLength = 300; //because of client
-
             try
             {
                 tbMessage.LostFocus += new EventHandler(tbMessage_LostFocus);
@@ -361,12 +359,13 @@ namespace TextVerteiler
 
         #region Opacity
 
-
+        [System.Diagnostics.DebuggerHidden()]
         private void SetEnterOpacity()
         {
             this.Opacity = 1.0;
         }
 
+        [System.Diagnostics.DebuggerHidden()]
         private void SetLeaveOpacity()
         {
             this.Opacity = LeaveOpacity;
@@ -374,6 +373,7 @@ namespace TextVerteiler
 
         #endregion
 
+        [System.Diagnostics.DebuggerHidden()]
         private void UpdateTimer_Tick(object sender, EventArgs e)
         {
 

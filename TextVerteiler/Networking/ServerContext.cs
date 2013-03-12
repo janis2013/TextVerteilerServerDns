@@ -130,6 +130,7 @@ namespace TextVerteiler.Networking
             }
         }
 
+        [System.Diagnostics.DebuggerHidden()]
         public int GetRealClientsCount()
         {
             int count = Clients.Count;
