@@ -71,7 +71,26 @@ namespace TextVerteiler
 
         public long NarichtenCounter { get; set; }
 
+        public static SendModeMultiplePackages SendModeForMultiplePackages = SendModeMultiplePackages.AllClientsSameTime;
 
+        ToolTip tip1 = new ToolTip();
+
+
+        public enum SendModeMultiplePackages
+        {
+            /// <summary>
+            /// Alle Teile der mehrteiligen Naricht werden erst zu dem 1. Client, dann zu dem 2. Clien... 
+            /// (Narichten kommen wahrscheinlich zu unterschiedlichen Zeiten an, bei großen Dateien)
+            /// </summary>
+            ClientAfterClient,
+
+            /// <summary>
+            /// 1. Teil der Naricht wird an alle Clients gesendet, 2. Teil der Naricht wird an alle Clients gesendet.
+            /// (Bei allen Clienten sollten die Narichten gleichzeitig ankommen.)
+            /// </summary>
+            AllClientsSameTime
+            
+        }
 
         public FormMain()
         {
@@ -85,7 +104,9 @@ namespace TextVerteiler
             this.IfButtonClicked = true;
             this.Zeitspanne = 1000;
 
+
         }
+
 
 
 
@@ -98,10 +119,22 @@ namespace TextVerteiler
 
         public void IniFormMain()
         {
+
+            tip1.UseFading = false;
+            tip1.UseAnimation = false;
+            tip1.ShowAlways = false;
+            tip1.InitialDelay = 500;
+
+            tip1.SetToolTip(btnResetFormat, "Löscht das aktuelle Format,\n sodass wieder normaler Text geschrieben werden kann.");
+
             this.TopMost = true;
             ResetPosition();
 
             FormMain.HistoryStackSize = 20;
+
+            Program.fmEinstellungen.cbSendModes.Items.Add("Alle Clienten gleichzeitig");
+            Program.fmEinstellungen.cbSendModes.Items.Add("Client für Client");
+            Program.fmEinstellungen.cbSendModes.SelectedIndex = 0;
 
             try
             {
@@ -182,6 +215,7 @@ namespace TextVerteiler
 
         private void btnSend_Click(object sender, EventArgs e)
         {
+
             if (this.IfButtonClicked)
             {
                 if (tbMessage.Text != "")
@@ -423,6 +457,11 @@ namespace TextVerteiler
 
 
 
+        }
+
+        private void btnResetFormat_Click(object sender, EventArgs e)
+        {
+            tbMessage.Font = this.Font;
         }
 
     }

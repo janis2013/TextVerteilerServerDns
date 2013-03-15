@@ -29,7 +29,7 @@ namespace TextVerteiler.Networking
 
         AsyncCallback BeginAcceptSocketCallback;
 
-        
+
 
         //server stuff
 
@@ -55,10 +55,10 @@ namespace TextVerteiler.Networking
             ServerMessage = System.Text.Encoding.ASCII.GetBytes("OK:" + OwnIP);
 
             UdpServer = new UdpClient();
-           
+
             UdpServer.JoinMulticastGroup(BroadcastServer.Address, 1);
 
-            UdpServer.BeginSend(ServerMessage, ServerMessage.Length,BroadcastServer, BeginSendUdpServerCallback, null);
+            UdpServer.BeginSend(ServerMessage, ServerMessage.Length, BroadcastServer, BeginSendUdpServerCallback, null);
 
             MaxClients = maxclients;
 
@@ -83,7 +83,7 @@ namespace TextVerteiler.Networking
 
             //next multicast package in 3 sec
             System.Threading.Thread.Sleep(FormMain.UDPBROADCAST_Delay);
-            UdpServer.BeginSend(ServerMessage, ServerMessage.Length,BroadcastServer, BeginSendUdpServerCallback, null);
+            UdpServer.BeginSend(ServerMessage, ServerMessage.Length, BroadcastServer, BeginSendUdpServerCallback, null);
         }
 
         public void DoListen()
@@ -169,7 +169,7 @@ namespace TextVerteiler.Networking
                     if (Program.MehrAlsEinPaketZulassen)
                     {
                         // normal 1 paket senden
-                        
+
 
                         List<byte[]> Messages = new List<byte[]>();
 
@@ -196,16 +196,38 @@ namespace TextVerteiler.Networking
                             }
                         } //end for
 
-                        foreach (var m in Messages)
+                        switch (FormMain.SendModeForMultiplePackages)
                         {
-                            foreach (var client in this.Clients)
-                            {
-                                if (client.socket.IsBound)
+                            case FormMain.SendModeMultiplePackages.AllClientsSameTime:
+                                foreach (var m in Messages) //jedes message stück wird erst an alle clienten verteilt
                                 {
-                                    client.Send(m);
+                                    foreach (var client in this.Clients)
+                                    {
+                                        if (client.socket.IsBound)
+                                        {
+                                            client.Send(m);
+                                        }
+                                    }
                                 }
-                            }
+                                break;
+
+                            case FormMain.SendModeMultiplePackages.ClientAfterClient:
+                                foreach (var client in this.Clients) //client für client bekommt alle messages
+                                {
+                                    foreach (var m in Messages)
+                                    {
+                                        if (client.socket.IsBound)
+                                        {
+                                            client.Send(m);
+                                        }
+                                    }
+                                }
+
+                                break;
+                            default:
+                                break;
                         }
+
 
 
                     }
@@ -213,7 +235,7 @@ namespace TextVerteiler.Networking
                 }
                 else
                 {
-                    
+
                     foreach (var client in this.Clients)
                     {
                         if (client.socket.IsBound)
@@ -222,7 +244,7 @@ namespace TextVerteiler.Networking
                         }
                     }
                 }
-               
+
 
             }
 

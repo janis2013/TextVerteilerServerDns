@@ -44,6 +44,8 @@
             this.label3 = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.numHistoryStack = new System.Windows.Forms.NumericUpDown();
+            this.cbSendModes = new System.Windows.Forms.ComboBox();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.groupBox1.SuspendLayout();
             this.groupBoxZeitspanne.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numZeitspanne)).BeginInit();
@@ -53,6 +55,7 @@
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numHistoryStack)).BeginInit();
+            this.groupBox5.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -268,11 +271,31 @@
             0});
             this.numHistoryStack.ValueChanged += new System.EventHandler(this.numHistoryStack_ValueChanged);
             // 
+            // cbSendModes
+            // 
+            this.cbSendModes.FormattingEnabled = true;
+            this.cbSendModes.Location = new System.Drawing.Point(6, 13);
+            this.cbSendModes.Name = "cbSendModes";
+            this.cbSendModes.Size = new System.Drawing.Size(219, 21);
+            this.cbSendModes.TabIndex = 10;
+            this.cbSendModes.SelectedIndexChanged += new System.EventHandler(this.cbSendModes_SelectedIndexChanged);
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.cbSendModes);
+            this.groupBox5.Location = new System.Drawing.Point(12, 210);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(231, 43);
+            this.groupBox5.TabIndex = 11;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Sende Modus";
+            // 
             // FormEinstellungen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(396, 217);
+            this.ClientSize = new System.Drawing.Size(385, 258);
+            this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.btnResetPosition);
@@ -297,6 +320,7 @@
             this.groupBox3.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.numHistoryStack)).EndInit();
+            this.groupBox5.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -319,5 +343,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.NumericUpDown numHistoryStack;
+        internal System.Windows.Forms.ComboBox cbSendModes;
+        private System.Windows.Forms.GroupBox groupBox5;
     }
 }

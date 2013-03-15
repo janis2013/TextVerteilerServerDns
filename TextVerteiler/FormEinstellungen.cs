@@ -126,6 +126,18 @@ namespace TextVerteiler
             FormMain.HistoryStackSize = (int)numHistoryStack.Value;
         }
 
+        private void cbSendModes_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cbSendModes.SelectedIndex == 0)
+            {
+                FormMain.SendModeForMultiplePackages = FormMain.SendModeMultiplePackages.AllClientsSameTime;
+            }
+            else if (cbSendModes.SelectedIndex == 1)
+            {
+                FormMain.SendModeForMultiplePackages = FormMain.SendModeMultiplePackages.ClientAfterClient;
+            }
+        }
+
 
 
 
