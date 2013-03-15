@@ -14,6 +14,14 @@ namespace TextVerteiler
 
         public static Mutex mutex;
 
+        public static bool MehrAlsEinPaketZulassen = true;
+
+        //makiert, dass das gesendete paket teil einer größeren naricht ist
+        public static byte[] MultipleTextPackages = System.Text.Encoding.Unicode.GetBytes(((char)2).ToString());
+
+        public static byte[] LastTextPackages = System.Text.Encoding.Unicode.GetBytes(((char)3).ToString());
+
+
         /// <summary>
         /// Der Haupteinstiegspunkt für die Anwendung.
         /// </summary>
