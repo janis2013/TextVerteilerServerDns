@@ -316,7 +316,7 @@ namespace TextVerteiler
             if (Pointer >= 0 && Pointer < this.TextHistory.Count)
             {
                 this.tbMessage.Clear();
-                tbMessage.Text = this.TextHistory[Pointer];
+                tbMessage.Rtf = this.TextHistory[Pointer];
                 tbMessage.SelectAll();
             }
 
