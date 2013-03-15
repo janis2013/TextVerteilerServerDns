@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using System.Threading;
 
 namespace TextVerteiler
 {
@@ -11,6 +12,7 @@ namespace TextVerteiler
         public static FormMain fmMain;
         public static FormEinstellungen fmEinstellungen;
 
+        public static Mutex mutex;
 
         /// <summary>
         /// Der Haupteinstiegspunkt für die Anwendung.
@@ -18,15 +20,28 @@ namespace TextVerteiler
         [STAThread]
         static void Main()
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
+            bool isNew;
+            mutex = new Mutex(false, Application.ProductName + "_abcxyz16091994", out isNew);
 
-            fmEinstellungen = new FormEinstellungen();
-            fmMain = new FormMain();
+            if (isNew)
+            {
+                //ok just this instance running
+                Application.EnableVisualStyles();
+                Application.SetCompatibleTextRenderingDefault(false);
 
-            fmMain.IniFormMain();
+                fmEinstellungen = new FormEinstellungen();
+                fmMain = new FormMain();
 
-            Application.Run();
+                fmMain.IniFormMain();
+
+                Application.Run();
+            }
+            else
+            {
+                MessageBox.Show("Eine Instanz des Programmes läuft bereits, bitte vorher beenden.", "Fehler",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                //wait, we just want 1 instance running... run to end
+            }
         }
 
 
