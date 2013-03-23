@@ -39,7 +39,7 @@ namespace TextVerteiler.Networking
 
         public static string Broadscast = "224.0.0.255"; // 224.0.0.255-239.255.255.255 port 2222
 
-        public static int BroadcastPort = 2222; //egal... da nur theoretischer (multicast)client
+        public static int BroadcastPort = 2222; //egal... da nur theoretischer (multicast)client - muss mit client übereinstimmen
 
 
         public static IPEndPoint BroadcastServer = new IPEndPoint(IPAddress.Parse(Broadscast), BroadcastPort);
@@ -54,9 +54,11 @@ namespace TextVerteiler.Networking
             BeginSendUdpServerCallback = new AsyncCallback(OnBeginSendUdpServerCallbackFinished);
             ServerMessage = System.Text.Encoding.ASCII.GetBytes("OK:" + OwnIP);
 
-            UdpServer = new UdpClient();
+            UdpServer = new UdpClient(new IPEndPoint(IPAddress.Any, 8011)); //da bei xp fehler
 
-            UdpServer.JoinMulticastGroup(BroadcastServer.Address, 1);
+
+            UdpServer.JoinMulticastGroup(BroadcastServer.Address);
+
 
             UdpServer.BeginSend(ServerMessage, ServerMessage.Length, BroadcastServer, BeginSendUdpServerCallback, null);
 
@@ -102,6 +104,8 @@ namespace TextVerteiler.Networking
             {
 
                 Socket clientsocket = listener.EndAcceptSocket(_ClientSocket);
+
+                clientsocket.NoDelay = false; //wnen ture kombiniert sehr kleine pakete um netzwerkauslastung zu reduzieren
 
                 ClientContext clientcontext = new ClientContext(clientsocket);
 

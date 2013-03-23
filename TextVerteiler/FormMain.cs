@@ -10,6 +10,13 @@
  * change port: Port
  * 
  * UDP Packet broadcast is every 3 seconds
+ * 
+ * 
+ * 
+ * Ports in use:
+ * udpServer: 8011
+ * tcpListener: 8008
+ * 
 */
 
 
@@ -140,15 +147,16 @@ namespace TextVerteiler
             {
                 tbMessage.LostFocus += new EventHandler(tbMessage_LostFocus);
 
-                IPHostEntry r = Dns.GetHostEntry(IPAddress.Loopback);
+                //IPHostEntry r = Dns.GetHostEntry(IPAddress.Loopback); //klappt nur bei win 7/8
+                IPHostEntry rr = Dns.GetHostEntry(Dns.GetHostName()); //klappt auch bei Win xp
 
-                var result = r.AddressList.Where((ipadd) => ipadd.AddressFamily == AddressFamily.InterNetwork && ipadd.ToString() != "127.0.0.1").ToList();
+                var result = rr.AddressList.Where((ipadd) => ipadd.AddressFamily == AddressFamily.InterNetwork && ipadd.ToString() != "127.0.0.1").ToList();
 
-                if (result.Count >= 1 && r.HostName != "")
+                if (result.Count >= 1 && rr.HostName != "")
                 {
 
                     //tbMessage.Text = "Eigene IP: " + result[0].ToString();// +" : " + Port.ToString();
-                    tbMessage.Text = "Eigener Dns Name: " + r.HostName;// +" : " + Port.ToString();
+                    tbMessage.Text = "Eigener Dns Name: " + rr.HostName;// +" : " + Port.ToString();
                     Server = new ServerContext(Port, 50, ref TextHistory, result[0].ToString());
                 }
                 else
