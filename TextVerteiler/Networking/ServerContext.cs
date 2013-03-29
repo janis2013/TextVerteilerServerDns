@@ -165,7 +165,7 @@ namespace TextVerteiler.Networking
             if (Clients.Count > 0)
             {
                 byte[] message = Text.ToByteArray();
-                int steps = (int)Math.Ceiling((double)message.Length / 42000); //wird abgerundet --> 3.5 soll 4
+                int steps = (int)Math.Ceiling((double)message.Length / FormMain.PaketSize); //wird abgerundet --> 3.5 soll 4
 
                 if (steps > 1)
                 {
@@ -174,29 +174,36 @@ namespace TextVerteiler.Networking
                     {
                         // normal 1 paket senden
 
-
+                        //naricht in Teile zerlegt
                         List<byte[]> Messages = new List<byte[]>();
+                        
 
                         for (int i = 0; i < steps; i++)
                         {
                             if (i == steps - 1)
                             {
-                                int missingBytes = (message.Length - i * 41998);
+                                //int missingBytes = (message.Length - i * 41998);
+                                int missingBytes = (message.Length - i * (FormMain.PaketSize - 2));
+
                                 Messages.Add(new byte[missingBytes + 2]);
+                                //die 2 überall, da letztes paket char(3) --> Unicode 2 bytes
                                 Messages[i][0] = Program.LastTextPackages[0];
                                 Messages[i][1] = Program.LastTextPackages[1];
 
-                                Array.Copy(message, (i * 41998), Messages[i], 2, (missingBytes));
+                                //Array.Copy(message, (i * 41998), Messages[i], 2, (missingBytes));
+                                Array.Copy(message, (i * (FormMain.PaketSize - 2)), Messages[i], 2, (missingBytes));
                             }
                             else
                             {
-                                Messages.Add(new byte[42000]);
+                                Messages.Add(new byte[FormMain.PaketSize]);
+                                //die 2 überall, da weiteres paket char(2) --> Unicode 2 bytes
                                 Messages[i][0] = Program.MultipleTextPackages[0];
                                 Messages[i][1] = Program.MultipleTextPackages[1];
 
                                 // 41998
-                                Array.Copy(message, (i * 41998), Messages[i], 2, (41998)); // (42000 - 2)(maxchars - MultipleTextPackages.length)
-
+                                //Array.Copy(message, (i * 41998), Messages[i], 2, (41998)); // (42000 - 2)(maxchars - MultipleTextPackages.length)
+                                Array.Copy(message, (i * (FormMain.PaketSize - 2)), Messages[i], 2, ((FormMain.PaketSize - 2)));
+                                
                             }
                         } //end for
 
@@ -239,7 +246,7 @@ namespace TextVerteiler.Networking
                 }
                 else
                 {
-
+                    //not in use
                     foreach (var client in this.Clients)
                     {
                         if (client.socket.IsBound)

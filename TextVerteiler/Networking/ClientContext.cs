@@ -59,6 +59,7 @@ namespace TextVerteiler.Networking
             int gesendeteBytesAnzahl = this.socket.EndSendTo(result);
         }
 
+        [System.Diagnostics.DebuggerHidden()]
         public bool isConnected()
         {
             if (socket != null && socket.Connected)

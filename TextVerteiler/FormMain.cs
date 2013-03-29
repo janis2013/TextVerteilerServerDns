@@ -45,6 +45,8 @@ namespace TextVerteiler
 
         public const int UDPBROADCAST_Delay = 3000;
 
+        public static int PaketSize = 42000; //muss auch bei clienten geändert werden !! bei socket.receivebuffersize
+
         public ServerContext Server { get; set; }
 
         private int Port = 8008;
@@ -455,7 +457,16 @@ namespace TextVerteiler
                 if (Server != null)
                 {
                     //* 2 da unicode 2 bytes pro char
-                    this.Text = Server.GetRealClientsCount() + " connected" + " - Text Input: " + tbMessage.Rtf.Length * 2 + "/42000 Zeichen" ;
+
+                    //this.Text = Server.GetRealClientsCount() + 
+                    //    " connected" + " - Unicode: " + 
+                    //    tbMessage.Rtf.Length * 2 + "/42000 Bytes" ;
+
+                    this.Text = Server.GetRealClientsCount() +
+                        " connected" + " - Unicode: " +
+                        tbMessage.Rtf.Length * 2 + " Bytes = " + (int)Math.Ceiling((double)tbMessage.Rtf.Length * 2 / PaketSize) +
+                        " Pakete (je " + PaketSize + ")";
+
                 }
 
                 this.CheckStatusCounter = 0;
