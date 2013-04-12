@@ -42,6 +42,7 @@
             this.lbStatus = new System.Windows.Forms.Label();
             this.tbMessage = new System.Windows.Forms.RichTextBox();
             this.btnResetFormat = new System.Windows.Forms.Button();
+            this.btnKopieren = new System.Windows.Forms.Button();
             this.contextMenuStripMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -82,7 +83,7 @@
             // 
             this.btnSend.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSend.Enabled = false;
-            this.btnSend.Location = new System.Drawing.Point(152, 83);
+            this.btnSend.Location = new System.Drawing.Point(216, 84);
             this.btnSend.Name = "btnSend";
             this.btnSend.Size = new System.Drawing.Size(62, 28);
             this.btnSend.TabIndex = 1;
@@ -98,7 +99,7 @@
             // 
             this.btnPrevious.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnPrevious.Enabled = false;
-            this.btnPrevious.Location = new System.Drawing.Point(54, 85);
+            this.btnPrevious.Location = new System.Drawing.Point(118, 86);
             this.btnPrevious.Name = "btnPrevious";
             this.btnPrevious.Size = new System.Drawing.Size(43, 26);
             this.btnPrevious.TabIndex = 2;
@@ -110,7 +111,7 @@
             // 
             this.btnNext.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnNext.Enabled = false;
-            this.btnNext.Location = new System.Drawing.Point(103, 85);
+            this.btnNext.Location = new System.Drawing.Point(167, 86);
             this.btnNext.Name = "btnNext";
             this.btnNext.Size = new System.Drawing.Size(43, 26);
             this.btnNext.TabIndex = 3;
@@ -127,7 +128,7 @@
             // 
             this.lbStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.lbStatus.AutoSize = true;
-            this.lbStatus.Location = new System.Drawing.Point(51, 69);
+            this.lbStatus.Location = new System.Drawing.Point(115, 70);
             this.lbStatus.Name = "lbStatus";
             this.lbStatus.Size = new System.Drawing.Size(56, 13);
             this.lbStatus.TabIndex = 4;
@@ -141,7 +142,7 @@
             this.tbMessage.Location = new System.Drawing.Point(0, 0);
             this.tbMessage.Name = "tbMessage";
             this.tbMessage.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.ForcedBoth;
-            this.tbMessage.Size = new System.Drawing.Size(226, 65);
+            this.tbMessage.Size = new System.Drawing.Size(290, 66);
             this.tbMessage.TabIndex = 5;
             this.tbMessage.Text = "";
             this.tbMessage.TextChanged += new System.EventHandler(this.tbMessage_TextChanged);
@@ -149,7 +150,7 @@
             // btnResetFormat
             // 
             this.btnResetFormat.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnResetFormat.Location = new System.Drawing.Point(6, 85);
+            this.btnResetFormat.Location = new System.Drawing.Point(70, 86);
             this.btnResetFormat.Name = "btnResetFormat";
             this.btnResetFormat.Size = new System.Drawing.Size(43, 26);
             this.btnResetFormat.TabIndex = 6;
@@ -157,11 +158,23 @@
             this.btnResetFormat.UseVisualStyleBackColor = true;
             this.btnResetFormat.Click += new System.EventHandler(this.btnResetFormat_Click);
             // 
+            // btnKopieren
+            // 
+            this.btnKopieren.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnKopieren.Location = new System.Drawing.Point(8, 86);
+            this.btnKopieren.Name = "btnKopieren";
+            this.btnKopieren.Size = new System.Drawing.Size(56, 26);
+            this.btnKopieren.TabIndex = 11;
+            this.btnKopieren.Text = "Kopiere";
+            this.btnKopieren.UseVisualStyleBackColor = true;
+            this.btnKopieren.Click += new System.EventHandler(this.btnKopieren_Click);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(226, 121);
+            this.ClientSize = new System.Drawing.Size(290, 122);
+            this.Controls.Add(this.btnKopieren);
             this.Controls.Add(this.btnResetFormat);
             this.Controls.Add(this.tbMessage);
             this.Controls.Add(this.lbStatus);
@@ -194,6 +207,7 @@
         private System.Windows.Forms.Label lbStatus;
         private System.Windows.Forms.RichTextBox tbMessage;
         private System.Windows.Forms.Button btnResetFormat;
+        private System.Windows.Forms.Button btnKopieren;
     }
 }
 

@@ -83,6 +83,7 @@ namespace TextVerteiler
         public static SendModeMultiplePackages SendModeForMultiplePackages = SendModeMultiplePackages.AllClientsSameTime;
 
         ToolTip tip1 = new ToolTip();
+        ToolTip tip2 = new ToolTip();
 
 
         public enum SendModeMultiplePackages
@@ -134,7 +135,13 @@ namespace TextVerteiler
             tip1.ShowAlways = false;
             tip1.InitialDelay = 500;
 
+            tip2.UseFading = false;
+            tip2.UseAnimation = false;
+            tip2.ShowAlways = false;
+            tip2.InitialDelay = 500;
+
             tip1.SetToolTip(btnResetFormat, "Löscht das aktuelle Format,\n sodass wieder normaler Text geschrieben werden kann.");
+            tip2.SetToolTip(btnKopieren, "Makiert den gesamten Text und kopiert ihn in die Zwischenablage.");
 
             this.TopMost = true;
             ResetPosition();
@@ -481,6 +488,15 @@ namespace TextVerteiler
         private void btnResetFormat_Click(object sender, EventArgs e)
         {
             tbMessage.Font = this.Font;
+            tbMessage.SelectionFont = this.Font;
+            tbMessage.SelectionAlignment = HorizontalAlignment.Left;
+            tbMessage.Focus();
+        }
+
+        private void btnKopieren_Click(object sender, EventArgs e)
+        {
+            tbMessage.SelectAll();
+            tbMessage.Copy();
         }
 
     }
